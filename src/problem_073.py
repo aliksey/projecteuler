@@ -1,5 +1,5 @@
 # -------------------------------------------------------------------------------
-# Name:        Problem 72
+# Name:        Problem 73
 # Purpose:     projecteuler.net
 #
 # Author:      aliksey
