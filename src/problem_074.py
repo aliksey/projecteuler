@@ -4,7 +4,7 @@
 #
 # Author:      aliksey
 #
-# Solved:      12.09.2015
+# Solved:      05.09.2015
 # Copyright:   (c) aliksey 2015
 # Licence:     <your licence>
 # -------------------------------------------------------------------------------
