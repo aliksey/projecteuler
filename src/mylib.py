@@ -9,6 +9,8 @@
 # Licence:     <your licence>
 # -------------------------------------------------------------------------------
 
+import functools
+
 
 primes = []
 
@@ -92,6 +94,39 @@ def all_subsets(series):
     return result
 
 
+def all_binary_samples(length):
+    series = []
+
+    for n in range(0, 2 ** length):
+        p = n
+        s = []
+        for i in range(length):
+            if p % 2 == 1:
+                s.append(True)
+            else:
+                s.append(False)
+            p //= 2
+        series.append(s)
+
+    return series
+
+
+def all_samples(place_value_series):
+    sample = [0] * len(place_value_series)
+    result = [sample.copy()]
+
+    for n in range(functools.reduce(lambda x, y: x*y, place_value_series, 1) - 1):
+        for i in range(len(place_value_series)):
+            if sample[i] < place_value_series[i] - 1:
+                sample[i] += 1
+                break
+            else:
+                sample[i] = 0
+        result.append(sample.copy())
+
+    return result
+
+
 class PrimeFactorChain:
     def __init__(self, N, series=None):
         self.N = N
@@ -117,7 +152,7 @@ class PrimeFactorChain:
         if len(self.chain) == 1:
             return False
         else:
-            self.value /= self.chain[-1]
+            self.value //= self.chain[-1]
             self.chain = self.chain[:-1]
             self.prime_index = self.prime_index[:len(self.chain) + 1]
             return True
@@ -142,15 +177,18 @@ class PrimeFactorChain:
                 if self.append_chain():
                     break
             else:
-                return 0
+                return 1
         return self.value
 
     def get_factor_list(self):
-        return self.chain[1:]
+        if len(self.chain) == 1:
+            return self.chain
+        else:
+            return self.chain[1:]
 
     def get_factor_set(self):
         return set(self.chain[1:])
 
 
 if __name__ == '__main__':
-    print "mylib"
+    print("mylib")
