@@ -9,14 +9,48 @@
 # Licence:     <your licence>
 # -------------------------------------------------------------------------------
 
+from typing import List
+
 import functools
 
 
-primes = []
+class Primes:
+    def __init__(self, max_prime_value: int = 2):
+        self.primes = [2]
+        self._top_up_primes(max_prime_value)
+
+    def _top_up_primes(self, max_prime_value: int) -> None:
+        if self.primes[-1] >= max_prime_value:
+            return
+        else:
+            x = self.primes[-1] + 1
+
+        while True:
+            ok = True
+            for y in self.primes:
+                if x % y == 0:
+                    ok = False
+                    break
+                if y * y > x:
+                    break
+            if ok:
+                self.primes.append(x)
+                if x > max_prime_value:
+                    return
+            x += 1
+
+    def is_prime(self, n: int) -> bool:
+        if self.primes[-1] < n:
+            self._top_up_primes(n)
+
+        return n in self.primes
+
+    @property
+    def series(self):
+        return self.primes
 
 
-def get_n_primes(n):
-    global primes
+def get_n_primes(n: int) -> List[int]:
     primes = []
     x = 2
 
@@ -35,7 +69,6 @@ def get_n_primes(n):
 
 
 def get_primes_smaller(n):
-    global primes
     primes = []
     x = 2
 
@@ -55,7 +88,6 @@ def get_primes_smaller(n):
 
 
 def is_prime(n):
-    global primes
     primes = []
 
     for i in range(len(primes)):
@@ -188,7 +220,3 @@ class PrimeFactorChain:
 
     def get_factor_set(self):
         return set(self.chain[1:])
-
-
-if __name__ == '__main__':
-    print("mylib")

@@ -85,7 +85,7 @@ def main():
             if isPrime(rem,prime):
                 divs.add(rem)
             else:
-                print "Should not happen. rem =", rem
+                print("Should not happen. rem =", rem)
                 
         for d in divs:
             N -= (N/d - 1)
@@ -112,7 +112,8 @@ def main():
         
             # print n,"->",N,divs,"->",q
         
-    print "Solution:", P
+    print("Solution:", P)
+
 
 if __name__ == '__main__':
     main()
